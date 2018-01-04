@@ -5,9 +5,9 @@ _main, DEC 0
 	Input
 	Store Counter
 	JnS _fib
-    Jns _PopStack
+    	Jns _PopStack
 	Load tmp_stack
-    Output
+    	Output
 	JumpI _main
 
 
@@ -19,26 +19,26 @@ _checkZeroOneTwo, HEX 0
 	JnS _fibZeroOrLess // if input <= 0 (though techincally impossible to less than)
 	Subt One // if input > 0
 	Skipcond 400
-    Subt One // if input > 1
-    Skipcond 800 // if input = 1
+    	Subt One // if input > 1
+    	Skipcond 800 // if input = 1
 	JnS _fibOneTwo // if input = 1,2
 	JumpI _checkZeroOneTwo // if input > 2
 
 _fib, HEX 0
 	// Initialise Stack First Two Values
 	Load One
-    Store tmp_stack
+    	Store tmp_stack
 	JnS _PushStack
 	Load One
-    Store tmp_stack
+    	Store tmp_stack
 	JnS _PushStack
 
 	// Check Input
 	JnS _checkZeroOneTwo
 
-    Load Counter
+    	Load Counter
 	Subt Two
-    Store Counter
+    	Store Counter
 
 	// Calc fibN if input > 0
 	JnS _fibN
@@ -54,10 +54,10 @@ _fibOneTwo, HEX 0
 _fibN, HEX 0
 	// Pop top to values and store.
 	JnS _PopStack
-    Load tmp_stack
+    	Load tmp_stack
 	Store tmp_fibA
 	JnS _PopStack
-    Load tmp_stack
+    	Load tmp_stack
 	Store tmp_fibB
 
 	// Add the two stored values
@@ -65,12 +65,12 @@ _fibN, HEX 0
 	Add tmp_fibB
 	Store tmp_fibB
 	Load tmp_fibA
-    Store tmp_stack
+    	Store tmp_stack
     
-    // Push updated values back to stack
+    	// Push updated values back to stack
 	JnS _PushStack
 	Load tmp_fibB
-    Store tmp_stack
+    	Store tmp_stack
 	JnS _PushStack
 
 	// Check remaining iterations
@@ -95,7 +95,7 @@ _PushStack, HEX 0
 _PopStack, HEX 0
 	Load StackPointer
 	Add One
-    Store StackPointer
+    	Store StackPointer
 	LoadI StackPointer
 	Store tmp_stack
 	JumpI _PopStack
