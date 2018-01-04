@@ -43,8 +43,6 @@ _fib, HEX 0
 	// Calc fibN if input > 0
 	JnS _fibN
 
-	JnS _PopStack // return val
-
 _fibZeroOrLess, HEX 0
 	Clear
 	JumpI _fib
@@ -54,6 +52,7 @@ _fibOneTwo, HEX 0
 	JumpI _fib
 
 _fibN, HEX 0
+	// Pop top to values and store.
 	JnS _PopStack
     Load tmp_stack
 	Store tmp_fibA
@@ -61,16 +60,20 @@ _fibN, HEX 0
     Load tmp_stack
 	Store tmp_fibB
 
+	// Add the two stored values
 	Load tmp_fibA
 	Add tmp_fibB
 	Store tmp_fibB
 	Load tmp_fibA
     Store tmp_stack
+    
+    // Push updated values back to stack
 	JnS _PushStack
 	Load tmp_fibB
     Store tmp_stack
 	JnS _PushStack
 
+	// Check remaining iterations
 	Load Counter
 	Subt One
 	Store Counter
@@ -95,7 +98,7 @@ _PopStack, HEX 0
 	LoadI StackPointer
 	Store tmp_stack
 	JumpI _PopStack
-
+    
 
 // -- Variables --
 
@@ -105,7 +108,7 @@ One, DEC 1
 Two, DEC 2
 Three, DEC 3
 
-tmp_stack, HEX 0
+tmp_stack, HEX 0 // for giving and receiving values from the stack
 
 tmp_fibA, HEX 0
 tmp_fibB, HEX 0
