@@ -76,8 +76,4 @@ out:        out PORTB, r16
             out PORTD, r16
             ret
 
-
-; Oluwafemi Oladipo
-; K1456646
-;
 ; Switch between displaying byte 0x81 and 0x18.
